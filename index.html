@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web App Installer</title>
+  </head>
+  <body>
+    <h1>Beta Test 01</h1>
+    <script type="text/javascript">
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker.register("./SW.js").then(SW_Ready).catch(SW_Failed)
+      } else {
+        console.error("No support for Service worker");
+      }
+      function SW_Ready(msg) {
+        console.log("Service worker registered: "+msg);
+      }
+      function SW_Failed(err) {
+        console.error("Service worker unable to register: "+err);
+      }
+    </script>
+  </body>
+</html>
