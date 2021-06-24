@@ -2,7 +2,7 @@
   "name" : "NexTon PWA",
   "short_name" : "Nex PWA",
   "background_color" : "black",
-  "theme_color" : "#00ffff",
+  "theme_color" : "#010101",
   "display" : "standalone",
   "prefer_related_application": false,
   "start_url" : "./App/html/MainActivity.html",
