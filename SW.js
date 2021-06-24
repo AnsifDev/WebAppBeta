@@ -8,6 +8,6 @@ self.addEventListener("install", function(e){
         "https://ansifdev.github.io/MyWeb/img512.png",
         "https://ansifdev.github.io/MyWeb/img64.png"
       ]);
-    });
+    })
   );
 });
