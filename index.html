@@ -15,8 +15,20 @@
         <span class="navbar-brand mb-0 h1">GigaTech</span>
       </div>
     </nav>
+
     <div class="container-sm">
       <div class="row justify-content-center">
+        <div class="input-group bg-dark text-white mb-3">
+          <span class="input-group-text bg-secondary text-white">Key and Value</span>
+          <input id="input1" type="text" aria-label="First name" class="form-control bg-dark text-white">
+          <input id="input2" type="text" aria-label="Last name" class="form-control bg-dark text-white">
+          <button class="btn btn-outline-light" type="button" id="btn2">Save</button>
+        </div>
+        <div class="input-group bg-dark text-white mb-3">
+          <span class="input-group-text bg-secondary text-white">Key</span>
+          <input id="input3" type="text" aria-label="First name" class="form-control bg-dark text-white">
+          <button class="btn btn-outline-light" type="button" id="btn3">Read</button>
+        </div>
         (Beta3) The oldest classical Greek and Latin writing had little or no space between words and could be written in boustrophedon (alternating directions). Over time, text direction (left to right) became standardized, and word dividers and terminal punctuation became common. The first way to divide sentences into groups was the original paragraphs, similar to an underscore at the beginning of the new group.[2] The Greek parágraphos evolved into the pilcrow (¶), which in English manuscripts in the Middle Ages can be seen inserted inline between sentences. The hedera leaf (e.g. ☙) has also been used in the same way.
 
 
@@ -32,6 +44,14 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
 
       var InstallPrompt = null
       var btn1 = document.getElementById("btn1");
+      var btn2 = document.getElementById("btn2");
+      var btn3 = document.getElementById("btn3");
+      var input1 = document.getElementById("input1");
+      var input2 = document.getElementById("input2");
+      var input3 = document.getElementById("input3");
+      var installationEvent = false;
+
+      var timer = setTimeout(isPwaReady, 15000);
 
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./SW.js").then(SW_Ready).catch(SW_Failed)
@@ -55,6 +75,7 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       }
       function onInstallPromptReceived(Prompt) {
         console.log("installPrompt ready");
+        installationEvent = true;
         Prompt.preventDefault();
         InstallPrompt = Prompt;
         makeBtnEnable(true);
@@ -62,18 +83,26 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       function makeText(str){
         btn1.innerText = str
       }
-      function onBtn1Clicked(){
-        alert("clicked");
+      btn1.onclick = function(){
         makeBtnEnable(false);
         InstallPrompt.prompt();
       }
-      btn1.onclick = onBtn1Clicked;
-      window.addEventListener("beforeinstallprompt", onInstallPromptReceived);
-      if ('getInstalledRelatedApps' in window.navigator) {
-        const relatedApps = navigator.getInstalledRelatedApps();
-        var strs = JSON.stringify(relatedApps);
-        console.log(strs);
+      btn2.onclick = function(){
+        localStorage.setItem(input1.value, input2.value);
       }
+      btn3.onclick = function(){
+        var val = localStorage.getItem(input3.value);
+        alert(input3.value+": "+val);
+      }
+
+      function isPwaReady(){
+        if (installationEvent) {
+          console.log("PWA is suppose to be ready");
+        } else {
+          makeText("PWA Unavailable");
+        }
+      }
+      window.addEventListener("beforeinstallprompt", onInstallPromptReceived);
     </script>
 
   </body>
