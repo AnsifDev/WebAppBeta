@@ -69,6 +69,13 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       }
       btn1.onclick = onBtn1Clicked;
       window.addEventListener("beforeinstallprompt", onInstallPromptReceived);
+      if ('getInstalledRelatedApps' in window.navigator) {
+        const relatedApps = await navigator.getInstalledRelatedApps();
+        relatedApps.forEach((app) => {
+          //if your PWA exists in the array it is installed
+          console.log(app.platform, app.url);
+        });
+      }
     </script>
 
   </body>
