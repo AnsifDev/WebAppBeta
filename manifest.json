@@ -15,5 +15,9 @@
     "src": "https://ansifdev.github.io/MyWeb/img64.png",
     "type": "image/png",
     "sizes": "64x64"
+  }],
+  "related_applications": [{
+    "platform": "webapp",
+    "url": "./manifest.json"
   }]
 }
