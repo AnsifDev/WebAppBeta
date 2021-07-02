@@ -54,6 +54,7 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       var timer;
 
       if (localStorage.getItem("PWAS")=="OK"){
+        makeBtnEnable(true);
         btn1.onclick = AppOpenLink;
       } else {
         btn1.onclick = AppInstallPrompt;
@@ -77,10 +78,8 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       function makeBtnEnable(allow){
         if (allow) {
           btn1.removeAttribute("disabled");
-          makeText("Install PWA");
         } else {
           btn1.setAttribute("disabled", "");
-          makeText("Waiting for User");
         }
       }
       function onInstallPromptReceived(Prompt) {
@@ -89,6 +88,7 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
         Prompt.preventDefault();
         InstallPrompt = Prompt;
         makeBtnEnable(true);
+        makeText("Install PWA");
       }
 
       btn2.onclick = function() {
@@ -117,6 +117,7 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
 
       function AppInstallPrompt() {
         makeBtnEnable(false);
+        makeText("Waiting for User");
         InstallPrompt.prompt();
       }
       window.addEventListener("beforeinstallprompt", onInstallPromptReceived);
