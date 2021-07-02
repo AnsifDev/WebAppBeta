@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <script src="../js/Utility.js" charset="utf-8"></script>
+    <title>Error Viewer</title>
+  </head>
+  <body>
+    Error Occured;
+    <div id="textview">
+
+    </div>
+    <script type="text/javascript">
+      var textview = document.getElementById('textview');
+      textview.innerHTML = WebRoute.getParams();
+    </script>
+  </body>
+</html>

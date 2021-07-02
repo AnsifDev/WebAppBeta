@@ -2,10 +2,28 @@
 <html lang="en" dir="ltr">
   <head>
     <meta charset="utf-8">
-    <script src="../js/MainActivity.js" charset="utf-8"></script>
+    <link href="../../bootstraps/css/bootstrap.min.css" rel="stylesheet">
+    <script src="../../bootstraps/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/Utility.js" charset="utf-8"></script>
     <title>PWA</title>
   </head>
   <body>
     <h1>Here is my App</h1>
+    <div class="container-sm">
+      <div class="row justify-content-center  m-3 m-sm-0">
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-primary text-white">Key and Value</span>
+          <input id="input1" type="text" aria-label="First name" class="form-control">
+          <input id="input2" type="text" aria-label="Last name" class="form-control">
+          <button class="btn btn-outline-dark" type="button" id="btn2">Save</button>
+        </div>
+        <div class="input-group mb-3">
+          <span class="input-group-text bg-primary text-white">Key</span>
+          <input id="input3" type="text" aria-label="First name" class="form-control">
+          <button class="btn btn-outline-dark" type="button" id="btn3">Read</button>
+        </div>
+      </div>
+    </div>
+    <script src="../js/MainActivity.js" charset="utf-8"></script>
   </body>
 </html>

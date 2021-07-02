@@ -51,19 +51,29 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
       var input3 = document.getElementById("input3");
       var installationEvent = false;
 
-      var timer = setTimeout(isPwaReady, 15000);
+      var timer;
+
+      if (localStorage.getItem("PWAS")=="OK"){
+        btn1.onclick = AppOpenLink;
+      } else {
+        btn1.onclick = AppInstallPrompt;
+        timer = setTimeout(isPwaReady, 30000);
+      }
 
       if ("serviceWorker" in navigator) {
         navigator.serviceWorker.register("./SW.js").then(SW_Ready).catch(SW_Failed)
       } else {
         console.error("No support for Service worker");
       }
+
       function SW_Ready(msg) {
         console.log("Service worker registered: "+msg);
       }
+
       function SW_Failed(err) {
         console.error("Service worker unable to register: "+err);
       }
+
       function makeBtnEnable(allow){
         if (allow) {
           btn1.removeAttribute("disabled");
@@ -80,17 +90,11 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
         InstallPrompt = Prompt;
         makeBtnEnable(true);
       }
-      function makeText(str){
-        btn1.innerText = str
-      }
-      btn1.onclick = function(){
-        makeBtnEnable(false);
-        InstallPrompt.prompt();
-      }
-      btn2.onclick = function(){
+
+      btn2.onclick = function() {
         localStorage.setItem(input1.value, input2.value);
       }
-      btn3.onclick = function(){
+      btn3.onclick = function() {
         var val = localStorage.getItem(input3.value);
         alert(input3.value+": "+val);
       }
@@ -102,7 +106,24 @@ In ancient manuscripts, another mean divide sentences into paragraphs was a line
           makeText("PWA Unavailable");
         }
       }
+
+      function AppOpenLink() {
+        window.location.href = "./App/html/MainActivity.html";
+      }
+
+      function makeText(str) {
+        btn1.innerText = str
+      }
+
+      function AppInstallPrompt() {
+        makeBtnEnable(false);
+        InstallPrompt.prompt();
+      }
       window.addEventListener("beforeinstallprompt", onInstallPromptReceived);
+      window.addEventListener('appinstalled', () => {
+        localStorage.setItem("PWAS", "OK")
+        window.location.href = "./App/html/MainActivity.html";
+      });
     </script>
 
   </body>
